@@ -137,6 +137,61 @@ public class SortingAlgorithms {
         return arr;
     }
 
+
+    /*
+     * Merge Sort does log n merge steps because each merge step doubles the list size.
+     * it does n for each merge step because it must look at every item
+     *
+     * so it runs O(n log n)
+     */
+    public static void mergeSort(int[] arr, int lowIndex, int highIndex) {
+        // Base case
+        if (lowIndex == highIndex)
+            return;
+
+        else {
+            int midIndex = (lowIndex + highIndex)/2;
+
+            //left half
+            mergeSort(arr, lowIndex, midIndex);
+            //right half
+            mergeSort(arr, midIndex + 1, highIndex);
+
+            // merges sorted left and right half
+            merge(arr, lowIndex, midIndex + 1, highIndex);
+        }
+
+    }
+
+    // Merges the sorted left and right half
+    public static void merge(int[] arr, int lowIndex, int midIndex, int highIndex) {
+        int[] left = new int[midIndex - lowIndex + 2];
+
+        for (int i = lowIndex; i <= midIndex; i++) {
+            left[i-lowIndex] = arr[i];
+        }
+        left[midIndex - lowIndex + 1] = Integer.MAX_VALUE;
+
+        int[] right = new int[highIndex - midIndex + 1];
+
+        for (int i = midIndex + 1; i <= highIndex; i++) {
+            right[i - midIndex - 1] = arr[i];
+        }
+
+        right[highIndex-midIndex] = Integer.MAX_VALUE;
+
+        int i = 0, j = 0;
+        for (int x = lowIndex; x <= highIndex; x++) {
+            if (left[i] <= right[j]) {
+                arr[x] = left[i];
+                i++;
+            }else {
+                arr[x] = right[j];
+                j++;
+            }
+        }
+    }
+
     public static void printArray(int[] arr) {
         for (int a: arr) {
             System.out.print(a + " ");
