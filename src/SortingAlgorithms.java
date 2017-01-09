@@ -12,7 +12,24 @@ public class SortingAlgorithms {
         printArray(arr2);
 
         int[] b = {4,3,5,2,10,11};
+        System.out.println("Before quicksort = ");
+        printArray(b);
         quickSort(b, 0, b.length-1);
+        System.out.println("After Quicksort");
+        printArray(b);
+
+        int[] z = {9,8,7,6,5,4,3,2,1};
+        System.out.println("Before selectionSort = ");
+        printArray(z);
+        System.out.println("After selectionSort = ");
+        printArray(selectionSort(z));
+
+        int[] bub = {9,8,7,6,5,4,3,2,1};
+        System.out.println("Before bubbleSort = ");
+        printArray(bub);
+        System.out.println("After bubbleSort = ");
+        printArray(bubbleSort(bub));
+
 
     }
 
@@ -86,6 +103,39 @@ public class SortingAlgorithms {
     }
 
 
+    public static int[] bubbleSort(int[] arr){
+        for (int i = 0; i < arr.length; i++)
+            for(int j = 0; j < arr.length - 1; j++) {
+                if (arr[j] > arr[j+1]) {
+                    int temp = arr[j];
+                    arr[j] = arr[j+1];
+                    arr[j+1] = temp;
+                }
+            }
+        return arr;
+    }
+
+    public static int[] selectionSort(int[] arr) {
+        int minValue, minIndex, temp=0;
+        for (int i = 0; i < arr.length; i++){
+            minValue = arr[i];
+            minIndex = i;
+            for (int j = i; j < arr.length; j++) {
+                if (arr[j] < minValue) {
+                    minValue = arr[j];
+                    minIndex = j;
+                }
+            }
+
+            if (minValue < arr[i]) {
+                temp = arr[i];
+                arr[i] = arr[minIndex];
+                arr[minIndex] = temp;
+            }
+        }
+
+        return arr;
+    }
 
     public static void printArray(int[] arr) {
         for (int a: arr) {
